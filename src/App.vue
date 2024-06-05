@@ -1,15 +1,27 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <HomePage />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HomePage from './pages/HomePage.vue'
+import { ref, provide } from "vue";
+import { connectionTest } from './request.js'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HomePage
+  },
+  setup() {
+    connectionTest()
+
+    const gridPair = ref([])
+    const pairs = ref([])
+    const totalOdInfo = ref(new Map())
+
+    provide('gridPair', gridPair)
+    provide('pairs', pairs) // 存放选择的OD对
+    provide('totalOdInfo', totalOdInfo)
   }
 }
 </script>
@@ -21,6 +33,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 10px;
 }
 </style>
